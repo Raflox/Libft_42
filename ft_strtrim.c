@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafilipe <rafilipe@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: rafilipe <rafilipe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:42:31 by rafilipe          #+#    #+#             */
-/*   Updated: 2022/10/18 23:57:26 by rafilipe         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:07:28 by rafilipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,17 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	if (!s1)
 		return (NULL);
-	len = ft_strlen(s1) - 1;
-	while (s1[i] && len)
-	{
-		while (ft_isset(set, s1[i]))
-			i++;
-		while (ft_isset(set, s1[len]))
-			len--;
-		break ;
-	}
-	str = malloc((len - i) * sizeof(char) + 1);
+	len = ft_strlen(s1);
+	while (ft_isset(set, s1[i]) && s1)
+		i++;
+	while (ft_isset(set, s1[len - 1]) && i < len)
+		len--;
+	str = (char *)malloc(((len - i) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-		n = 0;
-	while (i <= len)
+	n = 0;
+	while (i < len && s1[i])
 		str[n++] = s1[i++];
+	str[n] = '\0';
 	return (str);
 }
